@@ -28,7 +28,8 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 
-vim.opt.listchars = { space = "·", eol = "⏎" }
+vim.opt.listchars = { space = "·", eol = "⏎", tab = "> " }
+
 vim.opt.list = true
 -- Give more space for displaying messages.
 vim.opt.cmdheight = 1
