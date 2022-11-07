@@ -8,6 +8,7 @@ return require('packer').startup(function(use)
 
     use { "catppuccin/nvim", as = "catppuccin" }
 
+    use('lewis6991/gitsigns.nvim')
     use { "kdheepak/lazygit.nvim" }
     use {
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
