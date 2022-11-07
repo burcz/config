@@ -8,6 +8,8 @@ return require('packer').startup(function(use)
 
     use { "catppuccin/nvim", as = "catppuccin" }
 
+    use ('numToStr/FTerm.nvim')
+
     use('lewis6991/gitsigns.nvim')
     use { "kdheepak/lazygit.nvim" }
     use {
@@ -33,6 +35,10 @@ return require('packer').startup(function(use)
     use("saadparwaiz1/cmp_luasnip")
 
     use("mbbill/undotree")
+
+    use("nvim-treesitter/nvim-treesitter", {
+        run = ":TSUpdate"
+    })
 
     use("xiyaowong/nvim-transparent")
 end)
