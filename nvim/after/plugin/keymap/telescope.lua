@@ -5,6 +5,10 @@ nnoremap("<Leader>tf", function()
     require('telescope.builtin').find_files()
 end)
 
+nnoremap("<Leader>tg", function()
+    require('telescope.builtin').live_grep()
+end)
+
 nnoremap("<Leader>tk", function()
     require('burcz.telescope').search_xund_k8s()
 end)
