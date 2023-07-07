@@ -9,8 +9,9 @@ export TERM=alacritty
 bindkey '^R' history-incremental-search-backward
 
 export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+. $(brew --prefix nvm)/nvm.sh
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
 
 
 alias					\
@@ -72,7 +73,7 @@ k8sMedDev () {
 }
 
 k8sCla () {
-    KUBECONFIG=~/.kube/class2.yaml "$*"
+    KUBECONFIG=~/.kube/class2-live.yaml "$*"
 }
 
 k8sUat () {
@@ -108,5 +109,6 @@ uk9 () {
 }
 
 npmtoken () {
-    export NPM_TOKEN=$(op item  get q3vppwo34ndfbnzhuz5u6ytbwi --fields password)
+    export NPM_TOKEN=$(op item  get buwpyelko73jbpqxkvmgz574au --fields password)
 }
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
