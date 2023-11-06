@@ -49,7 +49,7 @@ pis () {
 }
 
 kaf () {
-    kubectl apply -f "$*" 
+    kubectl apply -f "$*"
 }
 
 ls () {
@@ -112,3 +112,4 @@ npmtoken () {
     export NPM_TOKEN=$(op item  get buwpyelko73jbpqxkvmgz574au --fields password)
 }
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export PATH="/Users/szabo/.cargo/bin:$PATH"
