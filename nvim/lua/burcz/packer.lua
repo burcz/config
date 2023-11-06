@@ -21,6 +21,9 @@ return require('packer').startup(function(use)
 	  end
   })
 
+  use('lewis6991/gitsigns.nvim')
+  use { "kdheepak/lazygit.nvim" }
+
   use({
       "folke/trouble.nvim",
       config = function()
