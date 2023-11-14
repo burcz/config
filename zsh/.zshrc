@@ -20,6 +20,8 @@ alias					\
   tt="nvim $TMUX_CONFIG"		\
   od="tmux new-window 'cd $DEVELOPMENT_DIR && nvim \$(ls . | fzf)'"
 
+alias tf="terraform"
+
 genpass () {
      op item edit $(op item list | grep 'retrievable generated password' | awk '/\w/{print$1}') --generate-password="$*",letters,digits >/dev/null && op read op://Private/'retrievable generated password'/password
 }
@@ -61,47 +63,71 @@ lg () {
 }
 
 k8sDev () {
-    KUBECONFIG=~/.kube/development.yaml "$*"
+    KUBECONFIG=~/.kube/development.yaml $*
 }
 
 k8sMedRes () {
-    KUBECONFIG=~/.kube/medical-research.yaml "$*"
+    KUBECONFIG=~/.kube/medical-research.yaml $*
 }
 
 k8sMedDev () {
-    KUBECONFIG=~/.kube/medical-development.yaml "$*"
+    KUBECONFIG=~/.kube/medical-development.yaml $*
 }
 
 k8sCla () {
-    KUBECONFIG=~/.kube/class2-live.yaml "$*"
+    KUBECONFIG=~/.kube/class2-live.yaml $*
 }
 
 k8sUat () {
-    KUBECONFIG=~/.kube/uat.yaml "$*"
+    KUBECONFIG=~/.kube/uat.yaml $*
 }
 
 k8sBeta () {
-    KUBECONFIG=~/.kube/beta.yaml "$*"
+    KUBECONFIG=~/.kube/beta.yaml $*
+}
+
+bk () {
+    k8sBeta kubectl $*
 }
 
 bk9 () {
     k8sBeta k9s
 }
 
+dk () {
+    k8sDev kubectl $*
+}
+
 dk9 () {
     k8sDev k9s
+}
+
+mrk () {
+    k8sMedRes kubectl $*
 }
 
 mrk9 () {
     k8sMedRes k9s
 }
 
+mdk () {
+    k8sMedDev kubectl $*
+}
+
 mdk9 () {
     k8sMedDev k9s
 }
 
+ck () {
+    k8sCla kubectl $*
+}
+
 ck9 () {
     k8sCla k9s
+}
+
+uk () {
+    k8sUat kubectl $*
 }
 
 uk9 () {
@@ -113,3 +139,4 @@ npmtoken () {
 }
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="/Users/szabo/.cargo/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
