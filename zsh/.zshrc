@@ -22,6 +22,53 @@ alias					\
 
 alias tf="terraform"
 
+pinned () {
+  open -a Google\ Meet
+  echo https://meet.google.com/rka-kznq-nvv | pbcopy
+}
+
+xc () {
+  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --profile-email=szabo@xund.ai $*
+}
+
+bc () {
+  /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --profile-email=burczeckley@gmail.com $*
+}
+
+board () {
+  xc https://xund.atlassian.net/jira/software/c/projects/TEAM/boards/83
+}
+
+xcx () {
+  case $2 in
+  u)
+    ENVIRONMENT="uat"
+    ;;
+  b)
+    ENVIRONMENT="beta"
+    ;;
+  mr)
+    ENVIRONMENT="medicalresearch"
+    ;;
+  c)
+    ENVIRONMENT="class2"
+    ;;
+  d)
+    ENVIRONMENT="development"
+    ;;
+  md)
+    ENVIRONMENT="medicaldevelopment"
+    ;;
+  md)
+    ENVIRONMENT="medicaldevelopment"
+    ;;
+  *)
+    ENVIRONMENT="development"
+    ;;
+  esac
+  xc https://$1.$ENVIRONMENT.xund.solutions
+}
+
 genpass () {
      op item edit $(op item list | grep 'retrievable generated password' | awk '/\w/{print$1}') --generate-password="$*",letters,digits >/dev/null && op read op://Private/'retrievable generated password'/password
 }
@@ -60,6 +107,10 @@ ls () {
 
 lg () {
     lazygit
+}
+
+getKubeconf () {
+  exo compute sks kubeconfig $1 kubernetes-admin > ~/.kube/$1.yaml
 }
 
 k8sDev () {
@@ -140,3 +191,9 @@ npmtoken () {
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="/Users/szabo/.cargo/bin:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# BEGIN SNIPPET: OVHcloud Web PaaS CLI configuration
+HOME=${HOME:-'/Users/szabo'}
+export PATH="$HOME/"'.webpaas-cli/bin':"$PATH"
+if [ -f "$HOME/"'.webpaas-cli/shell-config.rc' ]; then . "$HOME/"'.webpaas-cli/shell-config.rc'; fi # END SNIPPET
+export OP_ACCOUNT="xundsolutions.1password.com"
