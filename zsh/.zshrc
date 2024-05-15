@@ -2,7 +2,6 @@ TMUX_CONFIG="~/.config/tmux/tmux.conf"
 DEVELOPMENT_DIR=~/Development/XUND
 
 setopt inc_append_history
-cd $DEVELOPMENT_DIR
 
 export TERM=alacritty
 
@@ -37,6 +36,62 @@ bc () {
 
 board () {
   xc https://xund.atlassian.net/jira/software/c/projects/TEAM/boards/83
+}
+
+getSecret () {
+  op item get $1 --vault ${2}-cluster-secrets --fields notesPlain | sed  's/\"//g'
+}
+
+sealSecret () {
+  case $2 in
+  u)
+    VAULT="uat"
+    CONFIG="config-uat"
+    ENVIRONMENT="uat"
+    ;;
+  b)
+    VAULT="beta"
+    CONFIG="config-beta"
+    ENVIRONMENT="beta"
+    ;;
+  mr)
+    VAULT="medical-research"
+    CONFIG="config-medres"
+    ENVIRONMENT="medical-research"
+    ;;
+  c)
+    VAULT="class2"
+    CONFIG="config-class2"
+    ENVIRONMENT="class2-live"
+    ;;
+  d)
+    VAULT="development"
+    CONFIG="config-dev"
+    ENVIRONMENT="development"
+    ;;
+  *)
+    VAULT="development"
+    CONFIG="config-dev"
+    ENVIRONMENT="development"
+    ;;
+  esac
+  getSecret $1 $VAULT > ~/tmp/kustomization.yaml
+
+  cat <<EOF >> ~/tmp/kustomization.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+EOF
+
+  kustomize build ~/tmp | KUBECONFIG=~/.kube/$CONFIG kubeseal --format yaml >~/Development/XUND/xund-k8s/environments/$ENVIRONMENT/resources/secrets/$1.yaml
+  rm ~/tmp/kustomization.yaml
+}
+
+ez () {
+  nvim ~/.zshrc
+}
+
+sc () {
+  source ~/.zshrc
 }
 
 xcx () {
@@ -85,6 +140,26 @@ wtrb () {
     curl wttr.in/budapest
 }
 
+dkak () {
+  k8sDev kak $*
+}
+
+bkak () {
+  k8sBeta kak $*
+}
+
+ckak () {
+  k8sCla kak $*
+}
+
+ukak () {
+  k8sUat kak $*
+}
+
+mrkak () {
+  k8sMedRes kak $*
+}
+
 kak () {
     kubectl kustomize --enable-helm "$*" | kubectl apply -f -
 }
@@ -114,11 +189,12 @@ getKubeconf () {
 }
 
 k8sDev () {
-    KUBECONFIG=~/.kube/development.yaml $*
+    #KUBECONFIG=~/.kube/development.yaml $*
+    KUBECONFIG=~/.kube/config-dev $*
 }
 
 k8sMedRes () {
-    KUBECONFIG=~/.kube/medical-research.yaml $*
+    KUBECONFIG=~/.kube/config-medres $*
 }
 
 k8sMedDev () {
@@ -126,15 +202,16 @@ k8sMedDev () {
 }
 
 k8sCla () {
-    KUBECONFIG=~/.kube/class2-live.yaml $*
+    KUBECONFIG=~/.kube/config-class2 $*
 }
 
 k8sUat () {
-    KUBECONFIG=~/.kube/uat.yaml $*
+    #KUBECONFIG=~/.kube/uat.yaml $*
+    KUBECONFIG=~/.kube/config-uat $*
 }
 
 k8sBeta () {
-    KUBECONFIG=~/.kube/beta.yaml $*
+    KUBECONFIG=~/.kube/config-beta $*
 }
 
 bk () {
@@ -196,4 +273,10 @@ export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 HOME=${HOME:-'/Users/szabo'}
 export PATH="$HOME/"'.webpaas-cli/bin':"$PATH"
 if [ -f "$HOME/"'.webpaas-cli/shell-config.rc' ]; then . "$HOME/"'.webpaas-cli/shell-config.rc'; fi # END SNIPPET
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/szabo/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/szabo/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/szabo/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/szabo/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 export OP_ACCOUNT="xundsolutions.1password.com"
