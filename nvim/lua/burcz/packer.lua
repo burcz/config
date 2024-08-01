@@ -76,5 +76,7 @@ return require('packer').startup(function(use)
   use("github/copilot.vim")
   use("eandrju/cellular-automaton.nvim")
   use("laytan/cloak.nvim")
+  use {'https://github.com/apple/pkl-neovim', after = "nvim-treesitter", run = ":TSInstall! pkl"} -- Pkl syntax highlighting
+
 
 end)
