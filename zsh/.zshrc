@@ -5,7 +5,14 @@ setopt inc_append_history
 
 export TERM=alacritty
 
-bindkey '^R' history-incremental-search-backward
+#bindkey '^R' history-incremental-search-backward
+
+source <(fzf --zsh)
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 export NVM_DIR="$HOME/.nvm"
 . $(brew --prefix nvm)/nvm.sh
@@ -17,13 +24,18 @@ alias					\
   tn="tmux -u -f $TMUX_CONFIG new"	\
   ta="tmux -u -f $TMUX_CONFIG attach"	\
   tt="nvim $TMUX_CONFIG"		\
-  od="tmux new-window 'cd $DEVELOPMENT_DIR && nvim \$(ls . | fzf)'"
+  od="cd $DEVELOPMENT_DIR && nvim \$(ls . | fzf)"
 
 alias tf="terraform"
+alias kc="kubectl"
 
 pinned () {
   open -a Google\ Meet
   echo https://meet.google.com/rka-kznq-nvv | pbcopy
+}
+
+k () {
+  xauthzconnect -u szabo@xund.ai -b -k $1
 }
 
 xc () {
@@ -35,7 +47,7 @@ bc () {
 }
 
 board () {
-  xc https://xund.atlassian.net/jira/software/c/projects/TEAM/boards/83
+  xc https://xund.atlassian.net/jira/software/c/projects/MR/boards/96
 }
 
 getSecret () {
@@ -144,20 +156,40 @@ dkak () {
   k8sDev kak $*
 }
 
+dkaf () {
+  k8sDev kaf $*
+}
+
 bkak () {
   k8sBeta kak $*
+}
+
+bkaf () {
+  k8sBeta kaf $*
 }
 
 ckak () {
   k8sCla kak $*
 }
 
+ckaf () {
+  k8sCla kaf $*
+}
+
 ukak () {
   k8sUat kak $*
 }
 
+ukaf () {
+  k8sUat kaf $*
+}
+
 mrkak () {
   k8sMedRes kak $*
+}
+
+mrkaf () {
+  k8sMedRes kaf $*
 }
 
 kak () {
@@ -176,7 +208,7 @@ kaf () {
     kubectl apply -f "$*"
 }
 
-ls () {
+lse () {
     exa -lah "$*"
 }
 
@@ -279,4 +311,7 @@ if [ -f '/Users/szabo/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/szabo/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/szabo/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Created by `pipx` on 2024-05-27 09:00:14
+export PATH="$PATH:/Users/szabo/.local/bin"
 export OP_ACCOUNT="xundsolutions.1password.com"
