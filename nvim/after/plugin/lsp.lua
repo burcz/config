@@ -1,4 +1,14 @@
 local lsp = require("lsp-zero")
+local lspConfig = require("lspconfig")
+
+lspConfig.tsserver.setup({
+  init_options = {
+    preferences = {
+      importModuleSpecifierPreference = "non-relative",
+      -- other settings
+    },
+  }
+})
 
 lsp.preset("recommended")
 
@@ -11,6 +21,7 @@ lsp.ensure_installed({
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
+
 
 
 local cmp = require('cmp')
