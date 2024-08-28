@@ -24,10 +24,16 @@ alias					\
   tn="tmux -u -f $TMUX_CONFIG new"	\
   ta="tmux -u -f $TMUX_CONFIG attach"	\
   tt="nvim $TMUX_CONFIG"		\
-  od="cd $DEVELOPMENT_DIR && nvim \$(ls . | fzf)"
+  od="cd $DEVELOPMENT_DIR && cd \$(ls . | fzf) && nvim ." \
+  r="tmux rename-window ${PWD##*/}"
 
 alias tf="terraform"
 alias kc="kubectl"
+
+d () {
+  package=$(ls $DEVELOPMENT_DIR/xund-monorepo/packages | fzf)
+  tmux neww -dP -F "#I:#W" -n $package -c $DEVELOPMENT_DIR/xund-monorepo/packages/$package 'pnpm dev'
+}
 
 pinned () {
   open -a Google\ Meet
@@ -48,6 +54,10 @@ bc () {
 
 board () {
   xc https://xund.atlassian.net/jira/software/c/projects/MR/boards/96
+}
+
+mono () {
+  xc https://gitlab.com/xundai/code-squad/web/xund-monorepo/-/merge_requests
 }
 
 getSecret () {
@@ -193,7 +203,7 @@ mrkaf () {
 }
 
 kak () {
-    kubectl kustomize --enable-helm "$*" | kubectl apply -f -
+    kustomize build --enable-helm "$*" | kubectl apply -f -
 }
 
 chtsh () {
@@ -201,7 +211,7 @@ chtsh () {
 }
 
 pis () {
-    kubectl kustomize --enable-helm "$*" | kubectl delete -f -
+    kustomize build --enable-helm "$*" | kubectl delete -f -
 }
 
 kaf () {
@@ -214,6 +224,10 @@ lse () {
 
 lg () {
     lazygit
+}
+
+ld () {
+    lazydocker
 }
 
 getKubeconf () {
