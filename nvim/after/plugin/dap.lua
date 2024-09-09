@@ -44,16 +44,19 @@ for _, language in ipairs(js_based_languages) do
       url = "http://localhost:3002",
       webRoot = "${workspaceRoot}/packages/cms-analytics-frontend",
       sourceMaps = true,
-      trace = true
+      trace = true,
+      stopOnEntry = true
     },
     {
       name = "ch-external-backend",
       type = "pwa-node",
       request = "attach",
       port = 10008,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/ch-external-backend",
       remoteRoot = "${workspaceRoot}/packages/ch-external-backend",
-      sourceMaps = true
+      sourceMaps = true,
+      stopOnEntry = true
     },
     {
       name = "ch-external-frontend",
@@ -62,16 +65,19 @@ for _, language in ipairs(js_based_languages) do
       url = "http://localhost:3000",
       webRoot = "${workspaceRoot}/packages/cms-external-frontend",
       sourceMaps = true,
-      trace = true
+      trace = true,
+      stopOnEntry = true
     },
     {
       name = "ch-identity-backend",
       type = "pwa-node",
       request = "attach",
       port = 10009,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/ch-identity-backend",
       remoteRoot = "${workspaceRoot}/packages/ch-identity-backend",
-      sourceMaps = true
+      sourceMaps = true,
+      stopOnEntry = true
     },
     {
       name = "ch-identity-frontend",
@@ -80,16 +86,19 @@ for _, language in ipairs(js_based_languages) do
       url = "http://localhost:3003",
       webRoot = "${workspaceRoot}/packages/cms-identity-frontend",
       sourceMaps = true,
-      trace = true
+      trace = true,
+      stopOnEntry = true
     },
     {
       name = "ch-internal-backend",
       type = "pwa-node",
       request = "attach",
       port = 10010,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/ch-internal-backend",
       remoteRoot = "${workspaceRoot}/packages/ch-internal-backend",
-      sourceMaps = true
+      sourceMaps = true,
+      stopOnEntry = true
     },
     {
       name = "ch-internal-frontend",
@@ -98,16 +107,19 @@ for _, language in ipairs(js_based_languages) do
       url = "http://localhost:3001",
       webRoot = "${workspaceRoot}/packages/cms-internal-frontend",
       sourceMaps = true,
-      trace = true
+      trace = true,
+      stopOnEntry = true
     },
     {
       name = "cms-backend",
       type = "pwa-node",
       request = "attach",
       port = 10002,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/cms-backend",
       remoteRoot = "${workspaceRoot}/packages/cms-backend",
-      sourceMaps = true
+      sourceMaps = true,
+      stopOnEntry = true
     },
     {
       name = "cms-frontend",
@@ -116,16 +128,19 @@ for _, language in ipairs(js_based_languages) do
       url = "http://localhost:3040",
       webRoot = "${workspaceRoot}/packages/cms-frontend",
       sourceMaps = true,
-      trace = true
+      trace = true,
+      stopOnEntry = true
     },
     {
       name = "health-check-backend",
       type = "pwa-node",
       request = "attach",
       port = 10003,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/health-check-backend",
       remoteRoot = "${workspaceRoot}/packages/health-check-backend",
-      sourceMaps = true
+      sourceMaps = true,
+      stopOnEntry = true
     },
     {
       name = "medical-admin-backend",
@@ -145,22 +160,26 @@ for _, language in ipairs(js_based_languages) do
       url = "http://localhost:4001",
       webRoot = "${workspaceRoot}/packages/medical-admin-frontend",
       sourceMaps = true,
-      trace = true
+      trace = true,
+      stopOnEntry = true
     },
     {
       name = "medical-engine-api-gateway",
       type = "pwa-node",
       request = "attach",
       port = 10005,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/medical-engine-api-gateway",
       remoteRoot = "${workspaceRoot}/packages/medical-engine-api-gateway",
-      sourceMaps = true
+      sourceMaps = true,
+      stopOnEntry = true
     },
     {
       name = "medical-engine-backend",
       type = "pwa-node",
       request = "attach",
       port = 10006,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/medical-engine-backend",
       remoteRoot = "${workspaceRoot}/packages/medical-engine-backend",
       sourceMaps = true,
@@ -171,9 +190,11 @@ for _, language in ipairs(js_based_languages) do
       type = "pwa-node",
       request = "attach",
       port = 10007,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/medical-services-backend",
       remoteRoot = "${workspaceRoot}/packages/medical-services-backend",
-      sourceMaps = true
+      sourceMaps = true,
+      stopOnEntry = true
     },
     {
       name = "medical-services-frontend",
@@ -182,7 +203,8 @@ for _, language in ipairs(js_based_languages) do
       url = "http://localhost:3100",
       webRoot = "${workspaceRoot}/packages/medical-services-frontend",
       sourceMaps = true,
-      trace = true
+      trace = true,
+      stopOnEntry = true
     },
     {
       name = "web-app",
@@ -191,13 +213,15 @@ for _, language in ipairs(js_based_languages) do
       url = "http://localhost:4501",
       webRoot = "${workspaceRoot}/packages/web-app",
       sourceMaps = true,
-      trace = true
+      trace = true,
+      stopOnEntry = true
     },
     {
       name = "ecosystem-management-backend",
       type = "pwa-node",
       request = "attach",
       port = 10011,
+      cwd = "${workspaceFolder}",
       localRoot = "${workspaceRoot}/packages/ecosystem-management-backend",
       remoteRoot = "${workspaceRoot}/packages/ecosystem-management-backend",
       sourceMaps = true
