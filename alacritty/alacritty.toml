@@ -33,3 +33,6 @@ opacity = 0.93
 [window.padding]
 x = 13
 y = 23
+
+[scrolling]
+history = 13000
