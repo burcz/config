@@ -36,12 +36,38 @@ d () {
 }
 
 pinned () {
+  #xz https://meet.google.com/rka-kznq-nvv
   open -a Google\ Meet
   echo https://meet.google.com/rka-kznq-nvv | pbcopy
 }
 
+
+meet () {
+  xz https://meet.google.com/
+}
+
+nk () {
+  killall -9 node
+}
+
+lint () {
+  npx eslint src --fix
+}
+
+lintall () {
+  npx eslint packages/*/src --fix
+}
+
 k () {
   xauthzconnect -u szabo@xund.ai -b -k $1
+}
+
+bz () {
+  /Applications/Zen\ Browser.app/Contents/MacOS/zen -P burcz $* &>/dev/null &
+}
+
+xz () {
+  /Applications/Zen\ Browser.app/Contents/MacOS/zen -P xund $* &>/dev/null &
 }
 
 xc () {
@@ -53,11 +79,11 @@ bc () {
 }
 
 board () {
-  xc https://xund.atlassian.net/jira/software/c/projects/MR/boards/96
+  xz https://xund.atlassian.net/jira/software/c/projects/MR/boards/96
 }
 
 mono () {
-  xc https://gitlab.com/xundai/code-squad/web/xund-monorepo/-/merge_requests
+  xz https://gitlab.com/xundai/code-squad/web/xund-monorepo/-/merge_requests
 }
 
 getSecret () {
@@ -223,7 +249,7 @@ lse () {
 }
 
 lg () {
-    lazygit
+    lazygit -ucd ~/.config/lazygit
 }
 
 ld () {
