@@ -16,7 +16,8 @@ lsp.ensure_installed({
   'tsserver',
   'rust_analyzer',
   'lua_ls',
-  'terraformls'
+  'terraformls',
+  'gopls'
 })
 
 -- Fix Undefined global 'vim'
