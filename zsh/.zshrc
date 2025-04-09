@@ -35,6 +35,12 @@ d () {
   tmux neww -dP -F "#I:#W" -n $package -c $DEVELOPMENT_DIR/xund-monorepo/packages/$package 'pnpm dev'
 }
 
+myip () {
+  ip=$(curl -s ifconfig.co)
+  echo -n $ip | pbcopy
+  echo $ip
+}
+
 pinned () {
   #xz https://meet.google.com/rka-kznq-nvv
   open -a Google\ Meet
@@ -43,7 +49,14 @@ pinned () {
 
 
 meet () {
-  xz https://meet.google.com/
+  #xz https://meet.google.com/
+  xc https://meet.google.com/
+}
+
+compall () {
+  cd ~/Development/XUND/xund-monorepo
+  pnpm i && pnpm compile:all
+  cd -
 }
 
 nk () {
@@ -60,6 +73,10 @@ lintall () {
 
 k () {
   xauthzconnect -u szabo@xund.ai -b -k $1
+}
+
+ka () {
+  xauthzclient -u szabo@xund.ai -b -r -k $1
 }
 
 bz () {
@@ -79,11 +96,13 @@ bc () {
 }
 
 board () {
-  xz https://xund.atlassian.net/jira/software/c/projects/MR/boards/96
+  #xz https://xund.atlassian.net/jira/software/c/projects/MR/boards/96
+  xc https://xund.atlassian.net/jira/software/c/projects/MR/boards/96
 }
 
 mono () {
-  xz https://gitlab.com/xundai/code-squad/web/xund-monorepo/-/merge_requests
+  #xz https://gitlab.com/xundai/code-squad/web/xund-monorepo/-/merge_requests
+  xc https://gitlab.com/xundai/code-squad/web/xund-monorepo/-/merge_requests
 }
 
 getSecret () {
@@ -116,6 +135,11 @@ sealSecret () {
     VAULT="development"
     CONFIG="config-dev"
     ENVIRONMENT="development"
+    ;;
+  p)
+    VAULT="premedical-research"
+    CONFIG="config-premedical"
+    ENVIRONMENT="premedical-research"
     ;;
   *)
     VAULT="development"
@@ -170,6 +194,17 @@ xcx () {
     ;;
   esac
   xc https://$1.$ENVIRONMENT.xund.solutions
+}
+
+dnd () {
+  if [[ "$1" == "off" ]]
+  then
+    echo "Turning dnd off"
+    curl http://homeassistant.local:8123/api/webhook/dnd-off-5xzdt4TT-A4MG5rKDH8cFBXD
+  else
+    echo "Turning dnd on"
+    curl http://homeassistant.local:8123/api/webhook/start-work-iswZFaNsZ5mDfmCOjmsQ52k4
+  fi
 }
 
 genpass () {
@@ -354,4 +389,5 @@ if [ -f '/Users/szabo/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '
 
 # Created by `pipx` on 2024-05-27 09:00:14
 export PATH="$PATH:/Users/szabo/.local/bin"
+export PATH="/opt/homebrew/opt/kubernetes-cli@1.30/bin:$PATH"
 export OP_ACCOUNT="xundsolutions.1password.com"
