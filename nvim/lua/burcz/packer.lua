@@ -81,6 +81,7 @@ return require('packer').startup(function(use)
     opt = true,
     run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
   }
+  use('voldikss/vim-floaterm')
 
   use("folke/zen-mode.nvim")
   use("github/copilot.vim")

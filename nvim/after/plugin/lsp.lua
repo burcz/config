@@ -1,7 +1,7 @@
 local lsp = require("lsp-zero")
 local lspConfig = require("lspconfig")
 
-lspConfig.tsserver.setup({
+lspConfig.ts_ls.setup({
   init_options = {
     preferences = {
       importModuleSpecifierPreference = "non-relative",
@@ -13,7 +13,7 @@ lspConfig.tsserver.setup({
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-  'tsserver',
+  'ts_ls',
   'rust_analyzer',
   'lua_ls',
   'terraformls',
