@@ -89,5 +89,18 @@ return require('packer').startup(function(use)
   use("laytan/cloak.nvim")
   use {'https://github.com/apple/pkl-neovim', after = "nvim-treesitter", run = ":TSInstall! pkl"} -- Pkl syntax highlighting
 
+  -- AI
+  use 'stevearc/dressing.nvim'
+  use 'MunifTanjim/nui.nvim'
+  use 'MeanderingProgrammer/render-markdown.nvim'
+
+  use {
+    'yetone/avante.nvim',
+    branch = 'main',
+    run = 'make',
+    config = function()
+      require('avante').setup()
+    end
+  }
 
 end)
