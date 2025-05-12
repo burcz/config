@@ -6,6 +6,7 @@ vim.cmd.packadd('packer.nvim')
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+  use 'ThePrimeagen/vim-be-good'
 
   use {
 	  'nvim-telescope/telescope.nvim',
@@ -102,5 +103,6 @@ return require('packer').startup(function(use)
       require('avante').setup()
     end
   }
+--  use("p5quared/apple-music.nvim")
 
 end)

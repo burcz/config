@@ -1,0 +1,12 @@
+--local applemusic = require('apple-music')
+--
+--applemusic.setup({
+--  temp_playlist_name = "nvim_apple_music_temp",  -- Custom temporary playlist name
+--  picker = "auto",  -- Options: "auto", "telescope", "fzf-lua", or "select"
+--})
+--
+--
+--vim.keymap.set('n', '<leader>mt', applemusic.select_track, {})
+--vim.keymap.set('n', '<leader>ma', applemusic.select_album, {})
+--vim.keymap.set('n', '<leader>mp', applemusic.select_playlist, {})
+--
