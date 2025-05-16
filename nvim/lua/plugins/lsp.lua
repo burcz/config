@@ -1,6 +1,21 @@
 return {
   "neovim/nvim-lspconfig",
-  dependencies = { 'saghen/blink.cmp' },
+  dependencies = {
+    'saghen/blink.cmp',
+    opts = {
+      completion = {
+        list = {
+          selection = {
+            preselect = true,
+            auto_insert = true,
+          }
+        }
+      },
+      keymap = {
+        ["<CR>"] = { 'select_and_accept' },
+      }
+    },
+  },
   config = function()
     local capabilities = {
       textDocument = {
