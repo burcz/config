@@ -32,13 +32,13 @@ return {
       {}
     },
     {
-      "<leader>vh",
-      builtin.help_tags,
+      "<leader>pp",
+      builtin.live_grep,
       {}
     },
     {
-      "<leader>ps",
-      builtin.grep_string,
+      "<leader>vh",
+      builtin.help_tags,
       {}
     },
   }
