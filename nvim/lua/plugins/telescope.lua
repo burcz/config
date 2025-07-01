@@ -28,12 +28,14 @@ return {
     },
     {
       "<leader>ps",
-      builtin.grep_string,
+      function()
+        builtin.grep_string({ search = vim.fn.input("Grep > ") })
+      end,
       {}
     },
     {
       "<leader>pp",
-      builtin.live_grep,
+      builtin.grep_string,
       {}
     },
     {
@@ -43,3 +45,6 @@ return {
     },
   }
 }
+
+
+
