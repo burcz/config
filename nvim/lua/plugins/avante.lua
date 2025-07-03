@@ -35,7 +35,7 @@ return {
       repo_map = {
         ignore_patterns = vim.list_extend(
           { "%.git", "%.worktree", "__pycache__", "node_modules" }, -- defaults
-          read_ignore_patterns(".cursorignore")
+          read_ignore_patterns()
         ),
       },
       mappings = {
