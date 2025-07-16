@@ -1,6 +1,8 @@
 return {
   "nvim-neotest/neotest",
+  lazy = false,
   dependencies = {
+    "nvim-treesitter/nvim-treesitter",
     "nvim-neotest/nvim-nio",
     "folke/trouble.nvim",
     "nvim-neotest/neotest-jest",
