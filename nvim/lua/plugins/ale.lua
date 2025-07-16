@@ -13,5 +13,14 @@ return {
       typescript = {'prettier', 'eslint'}
     }
     g.ale_disable_lsp = 1
-  end
+  end,
+  keys = {
+    {
+      '<leader>f',
+      ':ALEFix<CR>',
+      mode = 'n',
+      noremap = true,
+      silent = true
+    }
+  }
 }
