@@ -32,6 +32,7 @@ return {
       "lua_ls",
       "ts_ls",
       "css_ls",
+      "pyright",
     })
   end,
 }
