@@ -1,7 +1,6 @@
 window:
-  opacity: 0.93
   dynamic_padding: false
-  decorations: buttonless 
+  decorations: buttonless
   padding:
     x: 13
     y: 23

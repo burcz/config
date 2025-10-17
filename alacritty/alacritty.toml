@@ -28,7 +28,6 @@ y = 0
 [window]
 decorations = "buttonless"
 dynamic_padding = false
-opacity = 0.93
 
 [window.padding]
 x = 13
