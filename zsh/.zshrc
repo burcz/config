@@ -4,6 +4,7 @@ DEVELOPMENT_DIR=~/Development/XUND
 setopt inc_append_history
 
 export TERM=alacritty
+export LG_CONFIG_FILE=~/.config/lazygit/config.yml
 
 #bindkey '^R' history-incremental-search-backward
 
@@ -25,18 +26,121 @@ alias					\
   ta="tmux -u -f $TMUX_CONFIG attach"	\
   tt="nvim $TMUX_CONFIG"		\
   od="cd $DEVELOPMENT_DIR && cd \$(ls . | fzf) && nvim ." \
-  r="tmux rename-window ${PWD##*/}"
+  p="cd $DEVELOPMENT_DIR/xund-monorepo && cd ./packages/\$(ls ./packages | fzf) && nvim ." \
+  pr="cd $DEVELOPMENT_DIR/xund-monorepo &&  nvim ./packages/\$(ls ./packages | fzf)" \
+  sa="cd $DEVELOPMENT_DIR/../simonadelstyle-react" \
+  r="tmux rename-window ${PWD##*/}" \
+  n="cd ~/.config/nvim && nvim ."
 
 alias tf="terraform"
 alias kc="kubectl"
+
+tm () {
+  osascript -e 'tell application "Google Meet" to activate' && \
+  osascript -e 'tell application "System Events" to keystroke "d" using command down' && \
+  osascript -e 'tell application "Alacritty" to activate'
+}
 
 d () {
   package=$(ls $DEVELOPMENT_DIR/xund-monorepo/packages | fzf)
   tmux neww -dP -F "#I:#W" -n $package -c $DEVELOPMENT_DIR/xund-monorepo/packages/$package 'pnpm dev'
 }
 
+s () {
+  package=$(ls $DEVELOPMENT_DIR/xund-monorepo/packages | fzf)
+  tmux neww -dP -F "#I:#W" -n $package -c $DEVELOPMENT_DIR/xund-monorepo/packages/$package 'pnpm start'
+}
+
+kg () {
+  case $1 in
+  dev)
+    CLUSTER="dev-cluster"
+    PROJECT="development-f337"
+    ;;
+  utility)
+    CLUSTER="utility-cluster"
+    PROJECT="utility-beaa"
+    ;;
+  beta)
+    CLUSTER="beta-cluster"
+    PROJECT="beta-e687"
+    ;;
+  *)
+    CLUSTER="dev-cluster"
+    PROJECT="development-f337"
+    ;;
+  esac
+  gcloud container clusters get-credentials $CLUSTER --project=${PROJECT} --region=europe-west3
+  k9s
+}
+
+dbproxy () {
+  case $1 in
+  dev)
+    SERVER="development-psql"
+    PROJECT="development-f337"
+    ;;
+  beta)
+    SERVER="beta-psql"
+    PROJECT="beta-e687"
+    ;;
+  *)
+    SERVER="development-psql"
+    PROJECT="development-f337"
+    ;;
+  esac
+  tmux neww -dP -n 'db-proxy' cloud-sql-proxy --address 0.0.0.0 --port 5433 ${PROJECT}:europe-west3:${SERVER}
+}
+
+nw () {
+  tmux neww
+}
+tk () {
+  local integer start=$(tmux display-message -p '#{window_index}')
+  if (( $# == 1 )); then
+    start=$1
+    start=$((start - 1))
+  fi
+
+  for i in {$((start + 1))..$((start + 15))}; do
+    tmux killw -t $i &>/dev/null
+  done
+}
+
+ch () {
+  servicelist=("ch-identity-backend" "ch-identity-frontend" "ch-internal-backend" "ch-internal-frontend" "ch-external-backend" "ch-external-frontend" "medical-engine-backend" "medical-engine-api-gateway")
+  for package in "${servicelist[@]}"; do
+    tmux neww -dP -F "#I:#W" -n "$package" -c "$DEVELOPMENT_DIR/xund-monorepo/packages/$package" 'pnpm start'
+    sleep 0.3
+  done
+}
+
+hcwebapp () {
+  servicelist=("ch-identity-backend" "ch-internal-backend" "health-check-web-app" "health-check-backend" )
+  for package in "${servicelist[@]}"; do
+    tmux neww -dP -F "#I:#W" -n "$package" -c "$DEVELOPMENT_DIR/xund-monorepo/packages/$package" 'pnpm start'
+    sleep 0.3
+  done
+}
+
+webapp () {
+  servicelist=("ch-identity-backend" "ch-external-backend" "web-app" "medical-engine-backend" "medical-engine-api-gateway" "medical-services-backend")
+  for package in "${servicelist[@]}"; do
+    tmux neww -dP -F "#I:#W" -n "$package" -c "$DEVELOPMENT_DIR/xund-monorepo/packages/$package" 'pnpm start'
+    sleep 0.3
+  done
+}
+
+mad () {
+  servicelist=("ch-identity-backend" "ch-identity-frontend" "medical-admin-backend" "medical-admin-frontend" "medical-engine-backend")
+  for package in "${servicelist[@]}"; do
+    tmux neww -dP -F "#I:#W" -n "$package" -c "$DEVELOPMENT_DIR/xund-monorepo/packages/$package" 'pnpm start'
+    sleep 0.3
+  done
+}
+
 myip () {
-  ip=$(curl -s ifconfig.co)
+  ip=$(curl -s myip.wtf)
   echo -n $ip | pbcopy
   echo $ip
 }
@@ -51,6 +155,10 @@ pinned () {
 meet () {
   #xz https://meet.google.com/
   xc https://meet.google.com/
+}
+
+ca () {
+  tmux neww -dk -n 'compall' -t 99 'source ~/.zshrc; compall; tmux renamew -t 99 compall-done'
 }
 
 compall () {
@@ -390,4 +498,7 @@ if [ -f '/Users/szabo/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '
 # Created by `pipx` on 2024-05-27 09:00:14
 export PATH="$PATH:/Users/szabo/.local/bin"
 export PATH="/opt/homebrew/opt/kubernetes-cli@1.30/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$PATH:$HOME/go/bin
+export PATH="$HOME/.local/bin:$PATH"
 export OP_ACCOUNT="xundsolutions.1password.com"
